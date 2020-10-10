@@ -12,6 +12,17 @@ def word_found(whole_string, word_to_find):
       return True
    return False
 
+
+def image_is_valid(path):
+    try:
+        im = Image.open(path)
+        print('image is valid!')
+        return True
+    except IOError:
+        # filename not an image file
+        print('not image')
+        return False
+
 # test part
 def test_dog_api_response_is_200():
     r = requests.get('https://dog.ceo/api/breeds/list/all')
@@ -61,21 +72,14 @@ def test_dog_api_get_random_picture():
     img = r.json()['message']
     dog_image = requests.get(img)
 
+    img_path = 'random_pic.jpg'
+
     # TODO: refactor this part to common file
     try:
-        with open('random_pic.jpg', 'wb') as file:
+        with open(img_path, 'wb') as file:
             file.write(dog_image.content)
     except IOError:
         print('not image')
 
-    def image_is_valid():
-        try:
-            im = Image.open('random_pic.jpg')
-            print('image is valid!')
-            return True
-        except IOError:
-            # filename not an image file
-            print('not image')
-            return False
 
-    assert image_is_valid() == True
+    assert image_is_valid(img_path) == True
