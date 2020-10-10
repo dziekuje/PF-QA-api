@@ -1,8 +1,12 @@
 import requests
 import pytest
+from PIL import Image
 
 # utils part
 # TODO: refactor this part, move into separate module
+from requests import Response
+
+
 def word_found(whole_string, word_to_find):
    if whole_string.find(word_to_find) != -1:
       return True
@@ -42,3 +46,31 @@ def test_dog_api_list_all_subbreed(breed_param, sub_breed_list):
     response_list = r.json()['message']
 
     assert response_list == sub_breed_list
+
+
+def test_dog_api_get_random_picture():
+    r = requests.get('https://dog.ceo/api/breeds/image/random')
+    assert r.status_code == 200
+
+    print("\n------- status/headers ---------")
+    print(r.status_code)
+    print(r.headers['content-type'])
+    print("--------------------------------")
+    # print(r.json())
+
+    img = r.json()['message']
+    dog_image = requests.get(img)
+
+    # TODO: refactor this part to common file
+    try:
+        with open('random_pic.jpg', 'wb') as file:
+            file.write(dog_image.content)
+    except IOError:
+        print('not image')
+
+    try:
+        im = Image.open('random_pic.jpg')
+        print('image is valid!')
+    except IOError:
+        # filename not an image file
+        print('not image')
