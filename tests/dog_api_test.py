@@ -68,9 +68,14 @@ def test_dog_api_get_random_picture():
     except IOError:
         print('not image')
 
-    try:
-        im = Image.open('random_pic.jpg')
-        print('image is valid!')
-    except IOError:
-        # filename not an image file
-        print('not image')
+    def image_is_valid():
+        try:
+            im = Image.open('random_pic.jpg')
+            print('image is valid!')
+            return True
+        except IOError:
+            # filename not an image file
+            print('not image')
+            return False
+
+    assert image_is_valid() == True
