@@ -4,3 +4,4 @@ pylint==2.6.0
 pytest==6.1.0
 requests==2.24.0
 selenium==3.141.0
+Pillow
