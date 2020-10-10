@@ -2,9 +2,9 @@ import requests
 import pytest
 
 
-# TODO: refactor this part, move into separate common file
-def string_found(string1, string2):
-   if string2.find(string1):
+# TODO: refactor this part, move into separate module
+def word_found(whole_string, word_to_find):
+   if whole_string.find(word_to_find) != -1:
       return True
    return False
 
@@ -20,12 +20,15 @@ def test_dog_api_response_is_200():
 
 @pytest.mark.parametrize("breed_param", ['hound', 'terrier', "stbernard"])
 def test_dog_api_receive_random_image_by_breed(breed_param):
-    print(breed_param)
+    # print(breed_param)
+
     r = requests.get(f'https://dog.ceo/api/breed/{breed_param}/images/random')
-    print(r.json())
-    print(type(r.json()))
+    # print(r.json())
+    # print(type(r.json()))
 
     dog_link = r.json()['message']
+    # print(dog_link)
+    # print(word_found(dog_link, breed_param))
 
     assert r.status_code == 200
-    assert string_found(dog_link, breed_param)
+    assert word_found(dog_link, breed_param) == True
