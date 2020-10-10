@@ -1,14 +1,14 @@
 import requests
 import pytest
 
-
+# utils part
 # TODO: refactor this part, move into separate module
 def word_found(whole_string, word_to_find):
    if whole_string.find(word_to_find) != -1:
       return True
    return False
 
-
+# test part
 def test_dog_api_response_is_200():
     r = requests.get('https://dog.ceo/api/breeds/list/all')
     assert r.status_code == 200
