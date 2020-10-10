@@ -32,3 +32,13 @@ def test_dog_api_receive_random_image_by_breed(breed_param):
 
     assert r.status_code == 200
     assert word_found(dog_link, breed_param) == True
+
+
+@pytest.mark.parametrize("breed_param, sub_breed_list", [('hound', ['afghan', 'basset', 'blood', 'english', 'ibizan', 'plott', 'walker']), ('terrier', ['american', 'australian', 'bedlington', 'border', 'dandie', 'fox', 'irish', 'kerryblue', 'lakeland', 'norfolk', 'norwich', 'patterdale', 'russell', 'scottish', 'sealyham', 'silky', 'tibetan', 'toy', 'westhighland', 'wheaten', 'yorkshire']), ('stbernard', [])])
+def test_dog_api_list_all_subbreed(breed_param, sub_breed_list):
+    r = requests.get(f'https://dog.ceo/api/breed/{breed_param}/list')
+    assert r.status_code == 200
+    # print(r.json()['message'])
+    response_list = r.json()['message']
+
+    assert response_list == sub_breed_list
