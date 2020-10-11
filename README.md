@@ -1,4 +1,6 @@
->mkdir >cd
+#DONE: api testing - https://www.sisense.com/blog/rest-api-testing-strategy-what-exactly-should-you-test/
+#DONE: api design https://hackernoon.com/restful-api-designing-guidelines-the-best-practices-60e1d954e7c9
+>>mkdir >cd
 
 >git init / git clone https..
 
