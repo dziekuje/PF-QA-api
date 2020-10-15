@@ -1,7 +1,7 @@
 import json
 
 
-FILE = 'json_config_data.json'
+FILE = '../json_config_data.json'
 
 
 def get_json():
