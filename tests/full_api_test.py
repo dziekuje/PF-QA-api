@@ -1,5 +1,5 @@
 import pytest
-from brew_utils.brew_utils import *
+from brew_utils.api_utils import *
 import pprint
 
 
