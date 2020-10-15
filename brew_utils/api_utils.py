@@ -1,5 +1,6 @@
 import pytest
 import requests
+from brew_utils import json_config_parse
 
 
 class API_Client:
@@ -21,5 +22,5 @@ class API_Client:
 # TODO: refactor, make configurable base_url
 @pytest.fixture(scope="session")
 def api_client(request):
-    base_url = "https://jsonplaceholder.typicode.com"
+    base_url = json_config_parse.get_mainurl()
     return API_Client(base_url=base_url)
